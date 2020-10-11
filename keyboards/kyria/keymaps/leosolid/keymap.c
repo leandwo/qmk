@@ -11,8 +11,10 @@ uint16_t cmd_tab_timer = 0;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+
+
 /* 
- * Base Layer: Colemak-DHm
+ * Layer 0: Colemak-DHm
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |   ` ~  |   Q  |   W  |   F  |   P  |   B  |                              |   J  |   L  |   U  |   Y  |  ; : |  | \   |
@@ -21,61 +23,96 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |   - _  |   Z  |   X  |   C  |   D  |   V  |      |      |  |      |      |   K  |   H  | ,  < | . >  | /  ? |  = +   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | GAME |      | BSPC | SPC  | TAB  |  | SHFT | ENTR | SYM  |      |      |
+ *                        | GAME | MEH  | BSPC | SPC  | TAB  |  | SHFT | ENTR | SYM  | HYPR | PLAY |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
  
+    // TODO: Open terminal shortcut for left palm instead of GAME?
 	[0] = LAYOUT(
-      KC_GRV,   KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,                                                               KC_J,     KC_L,           KC_U,         KC_Y,         KC_SCLN,      KC_BSLS,
-      KC_ESC,   LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S), LCTL_T(KC_T), KC_G,                                                               KC_M,     RCTL_T(KC_N),   RALT_T(KC_E), RGUI_T(KC_I), RSFT_T(KC_O), KC_QUOT, 
-      KC_MINS,  KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,     KC_NO,        KC_NO,        KC_NO,          KC_NO         KC_K,     KC_H,           KC_COMM,      KC_DOT,       KC_SLSH,      KC_EQL, 
-                                            TG(5),        KC_NO,        KC_BSPC,  LT(2,KC_SPC), LT(4,KC_TAB), OSM(MOD_RSFT),  LT(3,KC_ENT), OSL(1),   KC_NO,          KC_NO),
+      KC_GRV,   KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,                                                               KC_J,           KC_L,           KC_U,         KC_Y,         KC_SCLN,      KC_BSLS,
+      KC_ESC,   LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S), LCTL_T(KC_T), KC_G,                                                               KC_M,           RCTL_T(KC_N),   RALT_T(KC_E), RGUI_T(KC_I), RSFT_T(KC_O), KC_QUOT, 
+      KC_MINS,  KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,     KC_NO,        KC_NO,        KC_NO,          KC_NO,        KC_K,           KC_H,           KC_COMM,      KC_DOT,       KC_SLSH,      KC_EQL, 
+                                            TG(5),        KC_BSPC,      LT(2,KC_SPC), LT(4,KC_TAB), OSM(MOD_MEH),          OSM(MOD_HYPR), OSL(1),         LT(3,KC_ENT), OSM(MOD_RSFT),            KC_MPLY
+      ),
 
-	[1] = LAYOUT(KC_TILD, KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_DOT, KC_COLN, KC_PIPE, KC_ESC, LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4), KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_DQUO, KC_UNDS, KC_COMM, KC_LCBR, KC_LBRC, KC_LPRN, KC_LT, KC_NO, KC_NO, KC_NO, KC_NO, KC_GT, KC_RPRN, KC_RBRC, KC_RCBR, KC_QUES, KC_PLUS, KC_NO, KC_TRNS, KC_SPC, KC_TAB, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO),
-	[2] = LAYOUT(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_PGUP, KC_BSPC, KC_UP, KC_NO, KC_NO, KC_NO, KC_NO, KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_PGDN, KC_H, KC_J, KC_K, KC_L, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BSPC, KC_RSFT, KC_ENT, KC_NO, KC_NO),
-	[3] = LAYOUT(KC_NO, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO, KC_NO, KC_NO, KC_NO, KC_BRID, KC_BRIU, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_MUTE, KC_MRWD, KC_MPLY, KC_MFFD, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO),
-	[4] = LAYOUT(KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_MS_U, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_BTN2, KC_BTN3, KC_BTN1, KC_NO, KC_NO, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO),
-	[5] = LAYOUT(KC_1, KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_2, KC_LCTL, KC_A, KC_S, KC_D, KC_F, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_3, KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, MO(1), KC_SPC, MO(6), KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO),
-	[6] = LAYOUT(KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO)
+/* 
+ * Layer 1: Symbols
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |    ~   |   !  |   @  |   #  |   $  |   %  |                              |   ^  |   &  |   *  |   .  |  :   |   \    |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |   Esc  |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  |   "    |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |   _    |   ,  |   {  |   [  |   (  |   <  |      |      |  |      |      |   >  |   )  |   ]  |   }  |  ?   |   +    |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      | BSPC | SPC  | TAB  |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+
+  [1] = LAYOUT(
+      KC_TILD,  KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,         KC_PERC,                                  KC_CIRC,  KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COLN,      KC_PIPE, 
+      KC_ESC,   LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4),   KC_5,                                     KC_6,     RCTL_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0), KC_DQUO, 
+      KC_UNDS,  KC_COMM,      KC_LCBR,      KC_LBRC,      KC_LPRN,        KC_LT,    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_GT,    KC_RPRN,      KC_RBRC,      KC_RCBR,      KC_QUES,      KC_PLUS, 
+                                            KC_TRNS,        KC_TRNS,          KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,    KC_TRNS,        KC_TRNS
+      ),
+
+  [2] = LAYOUT(
+      KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_PGUP, KC_BSPC, KC_UP, KC_NO, KC_NO, KC_NO, 
+      KC_NO, KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, KC_NO, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END, KC_NO, 
+      KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_PGDN, KC_H, KC_J, KC_K, KC_L, KC_NO, 
+      KC_NO, KC_NO,   KC_NO, KC_NO, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+  [3] = LAYOUT(
+      KC_NO, KC_F11, KC_F12, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_NO, 
+      KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO, 
+      KC_NO, KC_NO, KC_NO, KC_BRID, KC_BRIU, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_NO, KC_MUTE, KC_MRWD, KC_MPLY, KC_MFFD, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+      ),
+
+	[4] = LAYOUT(
+      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_MS_U, KC_NO, KC_NO, KC_NO, 
+      KC_NO, KC_NO, KC_BTN2, KC_BTN3, KC_BTN1, KC_NO, KC_NO, KC_MS_L, KC_MS_D, KC_MS_R, KC_NO, KC_NO,
+      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+      ),
+
+	[5] = LAYOUT(
+      KC_1, KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_2, KC_LCTL, KC_A, KC_S, KC_D, KC_F, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_3, KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_TRNS, KC_NO, MO(1), KC_SPC, MO(6), KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS
+      ),
+
+	[6] = LAYOUT(
+      KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, 
+      KC_NO, KC_NO, KC_NO, KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO
+      )
 };
 
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-	switch(biton32(layer_state)) {
-		case 0:
-			// Switch tabs
-			clockwise ? tap_code16(C(KC_TAB)) : tap_code16(S(C(KC_TAB)));
-			break;
-		default:
-			// Volume control
-			clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
-			break;
-	}
-    }
-	else if (index == 1) {
-		if (!is_cmd_tab_active) {
-			is_cmd_tab_active = true;
-			register_code(KC_LGUI);
-		}
-		if (clockwise) {
-			cmd_tab_timer = timer_read();
-			tap_code16(S(KC_TAB));
-		} else {
-			cmd_tab_timer = timer_read();
-			tap_code16(KC_TAB);
-		}
+        // LR Arrow Keys  
+        clockwise ? tap_code(KC_BRIU) : tap_code(KC_BRID);
+    } else if (index == 1) {
+        clockwise ? tap_code(KC_VOLD) : tap_code(KC_VOLU);
+        /* switch(biton32(layer_state)) { */
+        /*     case 0: */
+        /*       // UD Arrow Keys */  
+        /*       clockwise ?  tap_code(KC_DOWN) : tap_code(KC_UP); */
+        /*       break; */
+        /*     default: */
+        /*       // Volume control */
+        /*       clockwise ? tap_code(KC_VOLD) : tap_code(KC_VOLU); */
+        /*       break; */
+        /* } */
     }
 }
 
-void matrix_scan_user(void) {
-  if (is_cmd_tab_active) {
-    if (timer_elapsed(cmd_tab_timer) > 400) {
-      unregister_code(KC_LGUI);
-      is_cmd_tab_active = false;
-    }
-  }
-}
 #endif
 
