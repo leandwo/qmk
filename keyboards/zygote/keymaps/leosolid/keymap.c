@@ -36,35 +36,35 @@ enum custom_keycodes
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[0] = LAYOUT( \
-KC_Q,         KC_W,         KC_F,          KC_P,         KC_B,          KC_NO,             KC_NO,    KC_J,                  KC_L,          KC_U,         KC_Y,         KC_SCOLON,    \
-LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S),  LCTL_T(KC_T), KC_G,          KC_NO,             KC_NO,    KC_M,                  RCTL_T(KC_N),  RALT_T(KC_E), RGUI_T(KC_I), RSFT_T(KC_O), \
-KC_Z,         KC_X,         KC_C,          KC_D,         KC_V,          KC_MINUS,          KC_EQUAL, KC_K,                  KC_H,          KC_COMM,      KC_DOT,       KC_SLSH,      \
-KC_ESC,       OSM(MOD_MEH), OSM(MOD_HYPR), KC_BSPC,      LT(1, KC_SPC), LT(2,     KC_TAB), OSL(3),   LT(4,         KC_ENT), OSM(MOD_RSFT), KC_VOLD,      KC_VOLU,      KC_QUOTE \
+[_BASE] = LAYOUT( \
+KC_Q,         KC_W,         KC_F,          KC_P,         KC_B,         KC_NO,        KC_NO,    KC_J,         KC_L,          KC_U,         KC_Y,         KC_SCOLON,    \
+LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S),  LCTL_T(KC_T), KC_G,         KC_NO,        KC_NO,    KC_M,         RCTL_T(KC_N),  RALT_T(KC_E), RGUI_T(KC_I), RSFT_T(KC_O), \
+KC_Z,         KC_X,         KC_C,          KC_D,         KC_V,         KC_MINUS,     KC_EQUAL, KC_K,         KC_H,          KC_COMM,      KC_DOT,       KC_SLSH,      \
+KC_ESC,       OSM(MOD_MEH), OSM(MOD_HYPR), KC_BSPC,      LT(_NAV,KC_SPC), LT(_MOUSE,KC_TAB), OSL(_SYMBOL),   LT(_FUNCTION,KC_ENT), OSM(MOD_RSFT), KC_VOLD,      KC_VOLU,      KC_QUOTE      \
 ),
 
-[1] = LAYOUT( \
+[_NAV] = LAYOUT( \
 _______, _______, _______, _______, _______, KC_NO,   KC_NO,   KC_PGDN, KC_END,  KC_UP,   _______, _______, \
 KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, _______, KC_NO,   KC_NO,   KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  \
 _______, _______, _______, _______, _______, _______, _______, KC_PGUP, KC_HOME, _______, _______, _______, \
 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
-[2] = LAYOUT( \
+[_MOUSE] = LAYOUT( \ 
 _______, _______, _______, _______, _______, KC_NO,   KC_NO,   _______, _______, KC_MS_U, _______, _______, \
 _______, KC_BTN2, KC_BTN3, KC_BTN1, _______, KC_NO,   KC_NO,   _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, \
 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 
-[3] = LAYOUT( \
+[_SYMBOL] = LAYOUT( \
 KC_EXLM,  KC_AT,   KC_HASH, KC_DLR,  KC_PERC,  KC_NO,   KC_NO,   KC_CIRC, KC_AMPR, KC_ASTR, KC_DOT,  _______, \
 KC_1,     KC_2,    KC_3,    KC_4,    KC_5,     KC_NO,   KC_NO,   KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    \
 KC_GRAVE, KC_LCBR, KC_LBRC, KC_LPRN, KC_TILDE, _______, _______, KC_PIPE, KC_RPRN, KC_RBRC, KC_RCBR, KC_BSLS, \
 _______,  _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______, _______  \
 ),
 
-[4] = LAYOUT( \
+[_FUNCTION] = LAYOUT( \
 KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,  KC_NO,   KC_NO,   KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_NO,   \
 KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_NO,   KC_NO,   KC_F6,   KC_F7,   KC_F8,    KC_F9,   KC_F10,  \
 _______, _______, _______, _______, _______, _______, _______, KC_MPLY, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, \
