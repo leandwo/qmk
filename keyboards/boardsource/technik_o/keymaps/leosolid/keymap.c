@@ -36,6 +36,25 @@ enum layers {
 /* #define POOPER  */
 /* #define SCOOPER */
 
+
+// COMBOS
+enum combos {
+  AR_BSPC,
+  ZX_BSPC,
+  IO_TAB
+};
+
+const uint16_t PROGMEM ar_combo[] = {KC_A, KC_R, COMBO_END};
+const uint16_t PROGMEM zx_combo[] = {KC_Z, KC_X, COMBO_END};
+const uint16_t PROGMEM io_combo[] = {KC_I, KC_O, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+  [AR_BSPC] = COMBO(ar_combo, KC_BSPC),
+  [ZX_BSPC] = COMBO(zx_combo, KC_BSPC),
+  [IO_TAB] = COMBO(io_combo, KC_TAB)
+};
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_ortho_4x12(
     KC_GRAVE, KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,    /**/ KC_J,    KC_L,         KC_U,         KC_Y,         KC_SCOLON,    KC_BSLS,
