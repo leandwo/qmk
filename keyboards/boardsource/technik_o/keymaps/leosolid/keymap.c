@@ -1,8 +1,8 @@
+#include "technik_o.h"
+#include QMK_KEYBOARD_H
 
 // TODO RBG highlight OSM and LEADER key pending
 // TODO get MBK legend glows
-
-#include QMK_KEYBOARD_H
 
 enum layers {
     _BASE,
@@ -25,10 +25,10 @@ enum layers {
 // OSM, one shot modifiers
 #define OSM_HYPER OSM(MOD_HYPR)
 #define OSM_MEH   OSM(MOD_MEH)
-#define OSM_SHIFT OSM(SHIFT)
-/* #define YA_MOD    OSM(MOD_LSFT|MOD_LALT|MOD_GUI) */
-#define KI_GAC    OSM(MOD_LCTL|MOD_LALT|MOD_GUI)
-#define KI_SCG    OSM(MOD_LCTL|MOD_LSFT|MOD_GUI)
+#define OSM_SHIFT OSM(MOD_LSFT)
+/* #define YA_MOD    OSM(MOD_LSFT|MOD_LALT|MOD_LGUI) */
+#define KI_GAC    OSM(MOD_LCTL|MOD_LALT|MOD_LGUI)
+#define KI_SCG    OSM(MOD_LCTL|MOD_LSFT|MOD_LGUI)
 #define NEO_CA    OSM(MOD_LALT|MOD_LCTL)
 #define NEO_CS    OSM(MOD_LSFT|MOD_LCTL)
 /* #define SUPER   */
@@ -38,10 +38,10 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_ortho_4x12(
-    KC_GRAVE, KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,    /**/ KC_J,    KC_L,        KC_U,         KC_Y,         KC_SCOLON,    KC_BSLS,
-    KC_BSPC,  LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S), LCTL_T(KC_T), KC_G,    /**/ KC_M,    RCT_T(KC_N), RALT_T(KC_E), RGUI_T(KC_I), RSFT_T(KC_O), KC_QUOT,
-    KC_MINUS, KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,    /**/ KC_K,    KC_H,        KC_COMM,      KC_DOT,       KC_SLSH,      KC_EQUAL,
-    KC_ESC,   NEO_CS,       NEO_CA,       KI_GAC/*KM*/, NAV_SPC,      KC_LEAD, /**/ OSL_NUM, OSM_MEH,     OSM_SHIFT,    OSM_HYPER,    KI_SCG,       KC_ENT
+    KC_GRAVE, KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,    /**/ KC_J,    KC_L,         KC_U,         KC_Y,         KC_SCOLON,    KC_BSLS,
+    KC_BSPC,  LSFT_T(KC_A), LGUI_T(KC_R), LALT_T(KC_S), LCTL_T(KC_T), KC_G,    /**/ KC_M,    RCTL_T(KC_N), RALT_T(KC_E), RGUI_T(KC_I), RSFT_T(KC_O), KC_QUOT,
+    KC_MINUS, KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,    /**/ KC_K,    KC_H,         KC_COMM,      KC_DOT,       KC_SLSH,      KC_EQUAL,
+    KC_ESC,   NEO_CS,       NEO_CA,       OSM_MEH,      NAV_SPC,      RESET, /**/ OSL_NUM, OSM_SHIFT,    OSM_HYPER,    KI_GAC,       KI_SCG,       KC_ENT
   ),
   [_NAV] = LAYOUT_ortho_4x12(
     KC_MPLY, KC_MPRV,  KC_MNXT, KC_VOLD, KC_VOLU, _______, /**/ KC_PGDN, KC_END,  KC_UP,   _______, _______, _______,
@@ -51,16 +51,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   ),
   [_NUMBER] = LAYOUT_ortho_4x12(
-    _______, KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, /**/ KC_CIRC, KC_AMPR,     KC_ASTR,      KC_DOT,       KC_COMM,      _______,
-    _______, LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4), KC_5,    /**/ KC_6,    RCT_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0), _______,
-    _______, KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5,   /**/ KC_F6,   KC_F7,       KC_F8,        KC_F9,        KC_F10,       _______,
-    _______, KC_F11,       KC_F12,       _______,      _______,      _______, /**/ KC_TRNS, XXXXXXX,     XXXXXXX,      XXXXXXX,      XXXXXXX,      _______
-  ),
-  [_RGB] = LAYOUT_ortho_4x12(
-    /* _______, _______, _______, _______, _______, _______, KC_CIRC, KC_AMPR,     KC_ASTR,      KC_DOT,       KC_COMM,      _______, */
-    /* _______, _______, _______, _______, _______, _______, _______, RCT_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0), _______, */
-    /* _______, _______, _______, _______, _______, _______, KC_F6,   KC_F7,       KC_F8,        KC_F9,        KC_F10,       _______, */
-    /* _______, _______, _______, _______, _______, _______, KC_TRNS, XXXXXXX,     XXXXXXX,      XXXXXXX,      XXXXXXX,      _______  */
+    _______, KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, /**/ KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,      _______,
+    _______, LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4), KC_5,    /**/ KC_6,    RCTL_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0), _______,
+    _______, KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5,   /**/ KC_F6,   KC_F7,        KC_F8,        KC_F9,        KC_F10,       _______,
+    _______, KC_F11,       KC_F12,       _______,      _______,      _______, /**/ KC_TRNS, XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      _______
   )
+  /* [_RGB] = LAYOUT_ortho_4x12( */
+  /*   /1* _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, *1/ */
+  /*   /1* _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, *1/ */
+  /*   /1* _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, *1/ */
+  /*   /1* _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  *1/ */
+  /* ) */
 };
 
