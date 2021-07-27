@@ -12,5 +12,5 @@
 #define MOUSEKEY_WHEEL_DELAY 0
 
 #define COMBO_COUNT 9
-#define COMBO_TERM 15
+#define COMBO_TERM 25
 
