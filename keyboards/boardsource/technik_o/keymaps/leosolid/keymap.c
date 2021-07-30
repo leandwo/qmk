@@ -6,6 +6,7 @@
 
 // TODO QMK Features to try
 // - TAP DANCE
+  // - tap dance quote
 // - LEADER
 
 // readability keycodes
@@ -39,35 +40,87 @@
 #define MT_E RALT_T(KC_E)
 #define MT_N RCTL_T(KC_N)
 
-// COMBOS
+/**********/
+/* COMBOS */
+/**********/
+
 // TODO move to combo file
 enum combos {
-  IO_TAB,
-  WF_LCBR,
-  UY_RCBR,
+  /* FP_COLN, */
+  /* LU_DQT, */
+
+  RT_LCBR,
+  NI_RCBR,
   RS_LPRN,
   EI_RPRN,
-  XC_LBRC,
-  COMDOT_RBRC,
+  ST_LBRC,
+  NE_RBRC,
+  UY_DQT,
+  WF_DQT,
 };
 
-const uint16_t PROGMEM io_combo[]     = {MT_I,    MT_O,   COMBO_END};
-const uint16_t PROGMEM wf_combo[]     = {KC_W,    KC_F,   COMBO_END};
+/* const uint16_t PROGMEM fp_combo[]     = {KC_F,    KC_P,   COMBO_END}; */
+/* const uint16_t PROGMEM lu_combo[]     = {KC_L,    KC_U,   COMBO_END}; */
+
 const uint16_t PROGMEM uy_combo[]     = {KC_U,    KC_Y,   COMBO_END};
-const uint16_t PROGMEM rs_combo[]     = {MT_R,    MT_S,   COMBO_END};
-const uint16_t PROGMEM ei_combo[]     = {MT_E,    MT_I,   COMBO_END};
-const uint16_t PROGMEM xc_combo[]     = {KC_X,    KC_C,   COMBO_END};
-const uint16_t PROGMEM comdot_combo[] = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM wf_combo[]     = {KC_W,    KC_F,   COMBO_END};
+const uint16_t PROGMEM rt_combo[] = {MT_R, MT_T, COMBO_END};
+const uint16_t PROGMEM ni_combo[] = {MT_N, MT_I, COMBO_END};
+const uint16_t PROGMEM rs_combo[] = {MT_R, MT_S, COMBO_END};
+const uint16_t PROGMEM ei_combo[] = {MT_E, MT_I, COMBO_END};
+const uint16_t PROGMEM st_combo[] = {MT_S, MT_T, COMBO_END};
+const uint16_t PROGMEM ne_combo[] = {MT_N, MT_E, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-  [IO_TAB]      = COMBO(io_combo,     KC_TAB),
-  [WF_LCBR]     = COMBO(wf_combo,     KC_LCBR),
-  [UY_RCBR]     = COMBO(uy_combo,     KC_RCBR),
-  [RS_LPRN]     = COMBO(rs_combo,     KC_LPRN),
-  [EI_RPRN]     = COMBO(ei_combo,     KC_RPRN),
-  [XC_LBRC]     = COMBO(xc_combo,     KC_LBRC),
-  [COMDOT_RBRC] = COMBO(comdot_combo, KC_RBRC),
+  /* [FP_COLN]     = COMBO(fp_combo,     KC_COLN), */
+  /* [LU_DQT]     = COMBO(lu_combo,     KC_DQT), */
+  [UY_DQT]     = COMBO(uy_combo,     KC_DQT),
+  [WF_DQT]     = COMBO(wf_combo,     KC_DQT),
+  [RT_LCBR] = COMBO(rt_combo, KC_LCBR),
+  [NI_RCBR] = COMBO(ni_combo, KC_RCBR),
+  [RS_LPRN] = COMBO(rs_combo, KC_LPRN),
+  [EI_RPRN] = COMBO(ei_combo, KC_RPRN),
+  [ST_LBRC] = COMBO(st_combo, KC_LBRC),
+  [NE_RBRC] = COMBO(ne_combo, KC_RBRC),
 };
+
+
+
+/*************/
+/* tap dance */
+/*************/
+// Tap Dance declarations
+enum {
+    TD_QT_DQT,
+    CT_CLN
+};
+
+void dance_cln_finished(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        register_code16(KC_COLN);
+    } else {
+        register_code(KC_SCLN);
+    }
+}
+
+void dance_cln_reset(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        unregister_code16(KC_COLN);
+    } else {
+        unregister_code(KC_SCLN);
+    }
+}
+
+// All tap dance functions would go here. Only showing this one.
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_QT_DQT] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQT),
+    [CT_CLN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_cln_finished, dance_cln_reset),
+};
+
+
+/**********/
+/* layers */
+/**********/
 
 enum layers {
     _BASE,
@@ -80,10 +133,10 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_ortho_4x12(
-    KC_GRAVE, KC_Q,   KC_W,   KC_F,    KC_P,    KC_B,  /**/ KC_J,    KC_L,      KC_U,      KC_Y,   KC_SCOLON, KC_BSLS,
-    MOUSE_BSPC,  MT_A,   MT_R,   MT_S,    MT_T,    KC_G,  /**/ KC_M,    MT_N,      MT_E,      MT_I,   MT_O,      KC_ENT,
-    KC_MINUS, KC_Z,   KC_X,   KC_C,    KC_D,    KC_V,  /**/ KC_K,    KC_H,      KC_COMM,   KC_DOT, KC_SLSH,   KC_EQUAL,
-    MOUSE_ESC,   NEO_CS, NEO_CA, OSM_MEH, NAV_SPC, KC_NO, /**/ OSL_NUM, OSM_SHIFT, OSM_HYPER, KI_GCA, KI_GCS,    KC_QUOT
+    KC_GRAVE,   KC_Q,   KC_W,   KC_F,    KC_P,    KC_B,   /**/ KC_J,    KC_L,      KC_U,      KC_Y,   TD(CT_CLN), KC_BSLS,
+    MOUSE_ESC, MT_A,   MT_R,   MT_S,    MT_T,    KC_G,   /**/ KC_M,    MT_N,      MT_E,      MT_I,   MT_O,      KC_QUOT,
+    KC_MINUS,   KC_Z,   KC_X,   KC_C,    KC_D,    KC_V,   /**/ KC_K,    KC_H,      KC_COMM,   KC_DOT, KC_SLSH,   KC_EQUAL,
+    MOUSE_BSPC,  NEO_CS, NEO_CA, OSM_MEH, NAV_SPC, KC_TAB, /**/ OSL_NUM, OSM_SHIFT, OSM_HYPER, KI_GCA, KI_GCS,    KC_ENT
   ),
   [_NUMBER] = LAYOUT_ortho_4x12(
     _______, KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, /**/ KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,      _______,
