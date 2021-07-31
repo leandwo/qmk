@@ -49,8 +49,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#define BACKLIGHT_PIN B7
 //#define BACKLIGHT_LEVELS 3
-#define BACKLIGHT_BREATHING
-#define RGBLIGHT_ANIMATIONS
+/* #define BACKLIGHT_BREATHING */
+/* #define RGBLIGHT_ANIMATIONS */
 #define RGB_DI_PIN C6
 #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 120
 #ifdef RGBLIGHT_ENABLE
