@@ -139,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LBRC,    KC_Q,    KC_W,   KC_F,   KC_P,    KC_B,    /**/ KC_J,    KC_L,      KC_U,      KC_Y,   KC_SCLN, KC_RBRC,
     KC_LPRN,    MT_A,    MT_R,   MT_S,   MT_T,    KC_G,    /**/ KC_M,    MT_N,      MT_E,      MT_I,   MT_O,    KC_RPRN,
     KC_MINUS,   KC_Z,    KC_X,   KC_C,   KC_D,    KC_V,    /**/ KC_K,    KC_H,      KC_COMM,   KC_DOT, KC_SLSH, KC_EQUAL,
-    TT(_MOUSE), _______, NEO_CS, NEO_CA, OSM_MEH, NAV_SPC, /**/ OSL_NUM, OSM_SHIFT, OSM_HYPER, KI_GCA, KI_GCS,  _______
+    TT(_MOUSE), _______, NEO_CS, NEO_CA, OSM_MEH, NAV_SPC, /**/ OSL_NUM, OSM_SHIFT, OSM_HYPER, KI_GCA, KI_GCS,  KC_COLN
   ),
   [_NUMBER] = LAYOUT_ortho_4x12(
     KC_GRAVE, KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, /**/ KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,      KC_BSLS,
@@ -183,58 +183,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 void rgb_matrix_indicators_kb(void) {
+  rgb_matrix_set_color_all(0, 0, 0);
   switch (biton32(layer_state)) {
     case _MOUSE:
-      rgb_matrix_set_color_all(0, 0, 0);
-      rgb_matrix_set_color(5, 0, 128, 0);
-      rgb_matrix_set_color(46, 0, 128, 0);
-      /* for (uint8_t i = 0; i <= 9; i++) { */
-      /*   rgb_matrix_set_color(i, 0, 128, 0); */
-      /* } */
-      rgb_matrix_set_color(24, 0, 128, 0);
-      rgb_matrix_set_color(25, 0, 128, 0);
-      rgb_matrix_set_color(26, 0, 128, 0);
-
-      rgb_matrix_set_color(18, 0, 128, 0);
-      rgb_matrix_set_color(29, 0, 128, 0);
-      rgb_matrix_set_color(30, 0, 128, 0);
-      rgb_matrix_set_color(31, 0, 128, 0);
+      rgb_matrix_set_color(46, 64, 128, 0);
+      rgb_matrix_set_color(24, 64, 128, 0);
+      rgb_matrix_set_color(25, 64, 128, 0);
+      rgb_matrix_set_color(26, 64, 128, 0);
+      rgb_matrix_set_color(18, 64, 128, 0);
+      rgb_matrix_set_color(29, 64, 128, 0);
+      rgb_matrix_set_color(30, 64, 128, 0);
+      rgb_matrix_set_color(31, 64, 128, 0);
+      for (uint8_t i = 0; i <= 9; i++) {
+        rgb_matrix_set_color(i, 64, 128, 0);
+      }
       break;
     case _NUMBER:
-      rgb_matrix_set_color_all(0, 0, 0);
-      rgb_matrix_set_color(52, 128, 0, 0);
-      rgb_matrix_set_color(7, 128, 0, 0);
-      for (uint8_t i = 22; i <= 33; i++) {
-        rgb_matrix_set_color(i, 128, 0, 0);
+      rgb_matrix_set_color(52, 64, 0, 128);
+      for (uint8_t i = 0; i <= 9; i++) {
+        rgb_matrix_set_color(i, 64, 0, 128);
       }
       break;
     case _NAV:
-      rgb_matrix_set_color_all(0, 0, 0);
-      rgb_matrix_set_color(51, 0, 0, 128);
-      rgb_matrix_set_color(7, 0, 0, 128);
-      /* for (uint8_t i = 0; i <= 9; i++) { */
-      /*   rgb_matrix_set_color(i, 0, 0, 128); */
-      /* } */
-
-      rgb_matrix_set_color(18, 0, 0, 128);
-      rgb_matrix_set_color(29, 0, 0, 128);
-      rgb_matrix_set_color(30, 0, 0, 128);
-      rgb_matrix_set_color(31, 0, 0, 128);
+      rgb_matrix_set_color(51, 0, 64, 128);
+      rgb_matrix_set_color(18, 0, 64, 128);
+      rgb_matrix_set_color(29, 0, 64, 128);
+      rgb_matrix_set_color(30, 0, 64, 128);
+      rgb_matrix_set_color(31, 0, 64, 128);
+      for (uint8_t i = 0; i <= 9; i++) {
+        rgb_matrix_set_color(i, 0, 64, 128);
+      }
       break;
-      /* case _: */
-      /*   rgb_matrix_set_color_all(0x00, 0x00, 0x7F); */
-      /*   break; */
-      /* case 5: */
-      /*   rgb_matrix_set_color_all(0x7F, 0x7F, 0x7F); */
-      /*   break; */
     default:
-      rgb_matrix_set_color_all(0, 0, 0);
       break;
   }
 
-  uint8_t locked_mods = get_oneshot_locked_mods();
-  uint8_t mods = get_oneshot_mods();
-  if (mods | locked_mods) {
-    rgb_matrix_set_color_all(128, 0, 128);
-  }
+    uint8_t mods = get_mods() | get_oneshot_locked_mods() | get_oneshot_mods();
+    uint8_t shift_on = mods & MOD_MASK_SHIFT;
+    uint8_t gui_on   = mods & MOD_MASK_GUI;
+    uint8_t alt_on   = mods & MOD_MASK_ALT;
+    uint8_t ctrl_on  = mods & MOD_MASK_CTRL;
+
+    if (shift_on) {
+      rgb_matrix_set_color(23, 128, 64, 0);
+      rgb_matrix_set_color(32, 128, 64, 0);
+      rgb_matrix_set_color(53, 128, 64, 0);
+      rgb_matrix_set_color(9, 128, 64, 0);
+      rgb_matrix_set_color(4, 128, 64, 0);
+    }
+    if (gui_on) { 
+      rgb_matrix_set_color(24, 64, 128, 0);
+      rgb_matrix_set_color(31, 64, 128, 0);
+      rgb_matrix_set_color(8, 64, 128, 0);
+      rgb_matrix_set_color(3, 64, 128, 0);
+    }  
+    if (alt_on) { 
+      rgb_matrix_set_color(25, 0, 128, 64);
+      rgb_matrix_set_color(30, 0, 128, 64);
+      rgb_matrix_set_color(7, 0, 128, 64);
+      rgb_matrix_set_color(2, 0, 128, 64);
+    }  
+    if (ctrl_on) { 
+      rgb_matrix_set_color(26, 0, 64, 128);
+      rgb_matrix_set_color(29, 0, 64, 128);
+      rgb_matrix_set_color(6, 0, 64, 128);
+      rgb_matrix_set_color(1, 0, 64, 128);
+    }  
 }
