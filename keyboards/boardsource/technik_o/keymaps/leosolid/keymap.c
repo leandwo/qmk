@@ -40,6 +40,7 @@
 #define MT_I RGUI_T(KC_I)
 #define MT_E RALT_T(KC_E)
 #define MT_N RCTL_T(KC_N)
+#define MEH_BSPC MEH_T(KC_BSPC)
 
 /**********/
 /* COMBOS */
@@ -53,6 +54,7 @@ enum combos {
   COMBO_ENT,
   COMBO_QUOT,
   COMBO_DQT,
+  COMBO_COLN
 };
 
 // left hand
@@ -77,12 +79,11 @@ const uint16_t PROGMEM comdot_combo[] = {KC_COMM, KC_DOT,  COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
 
-  [COMBO_ESC]  = COMBO(wf_combo,     KC_ESC),
-  [COMBO_BSPC] = COMBO(rs_combo,     KC_BSPC),
-  [COMBO_TAB]  = COMBO(uy_combo,     KC_TAB),
-  [COMBO_ENT]  = COMBO(ei_combo,     KC_ENT),
-  [COMBO_QUOT] = COMBO(comdot_combo, KC_QUOT),
-  [COMBO_DQT]  = COMBO(xc_combo,     KC_DQT),
+  /* [COMBO_ESC]  = COMBO(wf_combo,     KC_ESC), */
+  /* [COMBO_BSPC] = COMBO(rs_combo,     KC_BSPC), */
+  /* [COMBO_TAB]  = COMBO(uy_combo,     KC_TAB), */
+  /* [COMBO_ENT]  = COMBO(ei_combo,     KC_ENT), */
+  /* [COMBO_COLN] = COMBO(xc_combo,     KC_COLN), */
 
 };
 
@@ -126,8 +127,9 @@ combo_t key_combos[COMBO_COUNT] = {
 
 enum layers {
     _BASE,
-    _NUMBER,
     _NAV,
+    _NUMBER,
+    _SYMBOL,
     _MOUSE,
     _FUNCTION,
     _RGB
@@ -136,29 +138,35 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_ortho_4x12(
-    KC_LBRC,    KC_Q,    KC_W,   KC_F,   KC_P,    KC_B,    /**/ KC_J,    KC_L,      KC_U,      KC_Y,   KC_SCLN, KC_RBRC,
-    KC_LPRN,    MT_A,    MT_R,   MT_S,   MT_T,    KC_G,    /**/ KC_M,    MT_N,      MT_E,      MT_I,   MT_O,    KC_RPRN,
-    KC_MINUS,   KC_Z,    KC_X,   KC_C,   KC_D,    KC_V,    /**/ KC_K,    KC_H,      KC_COMM,   KC_DOT, KC_SLSH, KC_EQUAL,
-    TT(_MOUSE), _______, NEO_CS, NEO_CA, OSM_MEH, NAV_SPC, /**/ OSL_NUM, OSM_SHIFT, OSM_HYPER, KI_GCA, KI_GCS,  KC_COLN
-  ),
-  [_NUMBER] = LAYOUT_ortho_4x12(
-    KC_GRAVE, KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, /**/ KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,      KC_BSLS,
-    KC_K,     LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4), KC_5,    /**/ KC_6,    RCTL_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0), KC_J,
-    KC_TILDE, KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5,   /**/ KC_F6,   KC_F7,        KC_F8,        KC_F9,        KC_F10,       KC_PIPE,
-    _______,  KC_F11,       KC_F12,       _______,      _______,      _______, /**/ KC_TRNS, XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      _______
+    KC_TAB,   KC_Q,       KC_W,   KC_F,   KC_P,      KC_B,    /**/ KC_J,    KC_L,         KC_U,    KC_Y,   KC_SCLN, KC_BSPC,
+    KC_ESC,   MT_A,       MT_R,   MT_S,   MT_T,      KC_G,    /**/ KC_M,    MT_N,         MT_E,    MT_I,   MT_O,    KC_ENT,
+    KC_MINUS, KC_Z,       KC_X,   KC_C,   KC_D,      KC_V,    /**/ KC_K,    KC_H,         KC_COMM, KC_DOT, KC_SLSH, KC_EQUAL,
+    OSM_MEH,  TT(_MOUSE), NEO_CS, NEO_CA, OSM_SHIFT, NAV_SPC, /**/ OSL_NUM, OSL(_SYMBOL), _______, KI_GCA, KI_GCS,  _______
   ),
   [_NAV] = LAYOUT_ortho_4x12(
-    KC_MPLY, KC_MPRV,  KC_MNXT, KC_VOLD, KC_VOLU, _______, /**/ KC_PGDN, KC_END,  KC_UP,   _______, _______, RESET,
-    _______, KC_LSFT,  KC_LGUI, KC_LALT, KC_LCTL, _______, /**/ KC_DEL,  KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  _______,
-    RGB_TOG, RGB_RMOD, RGB_MOD, RGB_VAD, RGB_VAI, _______, /**/ KC_PGUP, KC_HOME, _______, _______, _______, _______,
-    _______, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, KC_TRNS, /**/ _______, _______, _______, _______, _______, _______
+    KC_MPLY, KC_MPRV,  KC_MNXT, KC_VOLD, KC_VOLU, _______, /**/ KC_PGDN,     KC_END,  KC_UP,   _______, _______, _______,
+    _______, KC_LSFT,  KC_LGUI, KC_LALT, KC_LCTL, _______, /**/ KC_DEL,      KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  _______,
+    RGB_TOG, RGB_RMOD, RGB_MOD, RGB_VAD, RGB_VAI, _______, /**/ KC_PGUP,     KC_HOME, _______, _______, _______, _______,
+    _______, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, KC_TRNS, /**/ MO(_SYMBOL), _______, _______, _______, _______, _______
 
   ),
+  [_NUMBER] = LAYOUT_ortho_4x12(
+    _______, KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC,     /**/ KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,      _______,
+    KC_K,    LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4), KC_5,        /**/ KC_6,    RCTL_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0), KC_J,
+    _______, KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5,       /**/ KC_F6,   KC_F7,        KC_F8,        KC_F9,        KC_F10,       _______,
+    _______, KC_F11,       KC_F12,       _______,      _______,      MO(_SYMBOL), /**/ KC_TRNS, XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      _______
+  ),
+  [_SYMBOL] = LAYOUT_ortho_4x12(
+   _______,  KC_EXLM, KC_AT,   KC_HASH,  KC_DLR,   KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_COLN, KC_SCLN, _______,
+   _______,  KC_LBRC, KC_LCBR, KC_LPRN,  KC_DQT,   KC_QUOT, KC_QUOT, KC_DQT,  KC_RPRN, KC_RCBR, KC_RBRC, _______,
+   KC_MINUS, KC_UNDS, XXXXXXX, KC_TILDE, KC_GRAVE, XXXXXXX, XXXXXXX, KC_BSLS, KC_PIPE, XXXXXXX, KC_PLUS, KC_EQUAL,
+   XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+  ),
   [_MOUSE] = LAYOUT_ortho_4x12(
-   _______,  _______, _______, _______, _______, _______,  _______, _______, KC_MS_U, _______, _______, _______, 
-   _______,  _______, KC_BTN2, KC_BTN3, KC_BTN1, _______,  _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,
-   _______,  _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______,
-   _______,  _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______, _______
+   RESET,   _______, _______, _______, _______, _______, _______, _______, KC_MS_U, _______, _______, _______,
+   _______, _______, KC_BTN2, KC_BTN3, KC_BTN1, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,
+   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   ),
 };
 
@@ -204,6 +212,12 @@ void rgb_matrix_indicators_kb(void) {
         rgb_matrix_set_color(i, 64, 0, 128);
       }
       break;
+    case _SYMBOL:
+      rgb_matrix_set_color(53, 0, 128, 64);
+      for (uint8_t i = 0; i <= 9; i++) {
+        rgb_matrix_set_color(i, 0, 128, 64);
+      }
+      break;
     case _NAV:
       rgb_matrix_set_color(51, 0, 64, 128);
       rgb_matrix_set_color(18, 0, 64, 128);
@@ -227,7 +241,7 @@ void rgb_matrix_indicators_kb(void) {
     if (shift_on) {
       rgb_matrix_set_color(23, 128, 64, 0);
       rgb_matrix_set_color(32, 128, 64, 0);
-      rgb_matrix_set_color(53, 128, 64, 0);
+      rgb_matrix_set_color(50, 128, 64, 0);
       rgb_matrix_set_color(9, 128, 64, 0);
       rgb_matrix_set_color(4, 128, 64, 0);
     }
