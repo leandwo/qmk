@@ -1,12 +1,9 @@
 #include "technik_o.h"
 #include QMK_KEYBOARD_H
 
-// TODO RBG highlight OSM and LEADER key pending
 // TODO get MBK legend glows
 
 // TODO QMK Features to try
-// - TAP DANCE
-  // - tap dance quote
 // - LEADER
 
 // readability keycodes
@@ -15,11 +12,10 @@
 
 // LT, layer toggles
 #define NAV_SPC   LT(_NAV,KC_SPACE)
-/* #define MOUSE_ESC LT(_MOUSE,KC_ESC) */
-/* #define MOUSE_BSPC LT(_MOUSE,KC_BSPC) */
-/* #define RGB_ESC   LT(_RGB,KC_ESC) */
+
 // OSL, one shot layers
 #define OSL_NUM   OSL(_NUMBER)
+#define OSL_SYM   OSL(_SYMBOL)
 
 // OSM, one shot modifiers
 #define OSM_HYPER OSM(MOD_HYPR)
@@ -47,51 +43,52 @@
 /**********/
 
 // TODO move to combo file
-enum combos {
-  COMBO_ESC,
-  COMBO_BSPC,
-  COMBO_TAB,
-  COMBO_ENT,
-  COMBO_QUOT,
-  COMBO_DQT,
-  COMBO_COLN
-};
+/* enum combos { */
+/*   COMBO_ESC, */
+/*   COMBO_BSPC, */
+/*   COMBO_TAB, */
+/*   COMBO_ENT, */
+/*   COMBO_QUOT, */
+/*   COMBO_DQT, */
+/*   COMBO_COLN */
+/* }; */
 
-// left hand
-const uint16_t PROGMEM qw_combo[]     = {KC_Q,    KC_W,    COMBO_END};
-const uint16_t PROGMEM wf_combo[]     = {KC_W,    KC_F,    COMBO_END};
-const uint16_t PROGMEM fp_combo[]     = {KC_F,    KC_P,    COMBO_END};
+/* // left hand */
+/* const uint16_t PROGMEM qw_combo[]     = {KC_Q,    KC_W,    COMBO_END}; */
+/* const uint16_t PROGMEM wf_combo[]     = {KC_W,    KC_F,    COMBO_END}; */
+/* const uint16_t PROGMEM fp_combo[]     = {KC_F,    KC_P,    COMBO_END}; */
 
-const uint16_t PROGMEM ar_combo[]     = {MT_A,    MT_R,    COMBO_END};
-const uint16_t PROGMEM rs_combo[]     = {MT_R,    MT_S,    COMBO_END};
-const uint16_t PROGMEM st_combo[]     = {MT_S,    MT_T,    COMBO_END};
+/* const uint16_t PROGMEM ar_combo[]     = {MT_A,    MT_R,    COMBO_END}; */
+/* const uint16_t PROGMEM rs_combo[]     = {MT_R,    MT_S,    COMBO_END}; */
+/* const uint16_t PROGMEM st_combo[]     = {MT_S,    MT_T,    COMBO_END}; */
 
-const uint16_t PROGMEM xc_combo[]     = {KC_X,    KC_C,    COMBO_END};
+/* const uint16_t PROGMEM xc_combo[]     = {KC_X,    KC_C,    COMBO_END}; */
 
-// right hand
-const uint16_t PROGMEM lu_combo[]     = {KC_L,    KC_U,    COMBO_END};
-const uint16_t PROGMEM uy_combo[]     = {KC_U,    KC_Y,    COMBO_END};
-const uint16_t PROGMEM ycol_combo[]   = {KC_Y,    KC_SCLN, COMBO_END};
+/* // right hand */
+/* const uint16_t PROGMEM lu_combo[]     = {KC_L,    KC_U,    COMBO_END}; */
+/* const uint16_t PROGMEM uy_combo[]     = {KC_U,    KC_Y,    COMBO_END}; */
+/* const uint16_t PROGMEM ycol_combo[]   = {KC_Y,    KC_SCLN, COMBO_END}; */
 
-const uint16_t PROGMEM ei_combo[]     = {MT_E,    MT_I,    COMBO_END};
+/* const uint16_t PROGMEM ei_combo[]     = {MT_E,    MT_I,    COMBO_END}; */
 
-const uint16_t PROGMEM comdot_combo[] = {KC_COMM, KC_DOT,  COMBO_END};
+/* const uint16_t PROGMEM comdot_combo[] = {KC_COMM, KC_DOT,  COMBO_END}; */
 
-combo_t key_combos[COMBO_COUNT] = {
+/* combo_t key_combos[COMBO_COUNT] = { */
 
-  /* [COMBO_ESC]  = COMBO(wf_combo,     KC_ESC), */
-  /* [COMBO_BSPC] = COMBO(rs_combo,     KC_BSPC), */
-  /* [COMBO_TAB]  = COMBO(uy_combo,     KC_TAB), */
-  /* [COMBO_ENT]  = COMBO(ei_combo,     KC_ENT), */
-  /* [COMBO_COLN] = COMBO(xc_combo,     KC_COLN), */
+/*   /1* [COMBO_ESC]  = COMBO(wf_combo,     KC_ESC), *1/ */
+/*   /1* [COMBO_BSPC] = COMBO(rs_combo,     KC_BSPC), *1/ */
+/*   /1* [COMBO_TAB]  = COMBO(uy_combo,     KC_TAB), *1/ */
+/*   /1* [COMBO_ENT]  = COMBO(ei_combo,     KC_ENT), *1/ */
+/*   /1* [COMBO_COLN] = COMBO(xc_combo,     KC_COLN), *1/ */
 
-};
+/* }; */
 
 
 
 /*************/
 /* tap dance */
 /*************/
+
 // Tap Dance declarations
 /* enum { */
 /*     TD_QT_DQT, */
@@ -171,24 +168,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 
-
-// RGB
-
- /* void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) { */
- /*    for (uint8_t i = led_min; i <= led_max; i++) { */
- /*        switch(get_highest_layer(layer_state|default_layer_state)) { */
- /*            case _MOUSE: */
- /*                rgb_matrix_set_color(i, RGB_BLUE); */
- /*                break; */
- /*            case _NUMBER: */
- /*                rgb_matrix_set_color(i, RGB_AZURE); */
- /*                break; */
- /*            default: */
- /*                break; */
- /*        } */
- /*    } */
-/* } */
-
+/*******/
+/* RGB */
+/*******/
 
 void rgb_matrix_indicators_kb(void) {
   rgb_matrix_set_color_all(0, 0, 0);

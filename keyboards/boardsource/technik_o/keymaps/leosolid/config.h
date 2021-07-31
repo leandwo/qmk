@@ -11,8 +11,8 @@
 #define MOUSEKEY_MAX_SPEED 7
 #define MOUSEKEY_WHEEL_DELAY 0
 
-#define COMBO_COUNT 14
-#define COMBO_TERM 20
+/* #define COMBO_COUNT 14 */
+/* #define COMBO_TERM 20 */
 
 #define TAPPING_TOGGLE 1
 
