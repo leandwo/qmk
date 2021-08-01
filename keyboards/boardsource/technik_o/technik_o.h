@@ -29,3 +29,17 @@
         {K36, K37, K38, K39, K40, K41, K42, K43, K44, K45, K46, K47} \
     }
 
+/* #undef TAPPING_TERM */
+/* #define TAPPING_TERM 250 */
+/* #define IGNORE_MOD_TAP_INTERRUPT */
+
+/* #define ONESHOT_TAP_TOGGLE 4 */
+
+/* #define MOUSEKEY_INTERVAL 16 */
+/* #define MOUSEKEY_DELAY 0 */
+/* #define MOUSEKEY_TIME_TO_MAX 60 */
+/* #define MOUSEKEY_MAX_SPEED 7 */
+/* #define MOUSEKEY_WHEEL_DELAY 0 */
+
+/* #define COMBO_COUNT 3 */
+/* #define COMBO_TERM 20 */
