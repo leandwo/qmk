@@ -12,6 +12,7 @@
 
 // LT, layer toggles
 #define NAV_SPC   LT(_NAV,KC_SPACE)
+#define MOUSE_ENT   LT(_MOUSE, KC_ENT)
 
 // OSL, one shot layers
 #define OSL_NUM   OSL(_NUMBER)
@@ -36,6 +37,8 @@
 #define MT_I RGUI_T(KC_I)
 #define MT_E RALT_T(KC_E)
 #define MT_N RCTL_T(KC_N)
+
+#define MT_TAB RSFT_T(KC_TAB)
 #define MEH_BSPC MEH_T(KC_BSPC)
 
 /**********/
@@ -123,48 +126,47 @@
 /**********/
 
 enum layers {
-    _BASE,
-    _NAV,
-    _NUMBER,
-    _SYMBOL,
-    _MOUSE,
-    _FUNCTION,
-    _RGB
+  _BASE,
+  _NAV,
+  _NUMBER,
+  _SYMBOL,
+  _MOUSE,
+  _FUNCTION,
+  _RGB
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_ortho_4x12(
-    KC_TAB,   KC_Q,       KC_W,   KC_F,   KC_P,      KC_B,    /**/ KC_J,    KC_L,         KC_U,    KC_Y,   KC_SCLN, KC_BSPC,
-    KC_ESC,   MT_A,       MT_R,   MT_S,   MT_T,      KC_G,    /**/ KC_M,    MT_N,         MT_E,    MT_I,   MT_O,    KC_ENT,
-    KC_MINUS, KC_Z,       KC_X,   KC_C,   KC_D,      KC_V,    /**/ KC_K,    KC_H,         KC_COMM, KC_DOT, KC_SLSH, KC_EQUAL,
-    OSM_MEH,  TT(_MOUSE), NEO_CS, NEO_CA, OSM_SHIFT, NAV_SPC, /**/ OSL_NUM, OSL(_SYMBOL), _______, KI_GCA, KI_GCS,  _______
-  ),
+      KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,    _______,   _______,   KC_J,    KC_L,         KC_U,         KC_Y,         KC_BSPC,
+      MT_A,         MT_R,         MT_S,         MT_T,         KC_G,    _______,   _______,   KC_M,    MT_N,         MT_E,         MT_I,         MT_O,
+      KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,    _______,   _______,   KC_K,    KC_H,         KC_COMM,      KC_DOT,       KC_SLSH,
+      _______,      _______,      _______,      KC_ESC,       NAV_SPC, MOUSE_ENT, OSM_SHIFT, OSL_NUM, OSL_SYM,      _______,      _______,      _______
+      ),
   [_NAV] = LAYOUT_ortho_4x12(
-    KC_MPLY, KC_MPRV,  KC_MNXT, KC_VOLD, KC_VOLU, _______, /**/ KC_PGDN,     KC_END,  KC_UP,   _______, _______, _______,
-    _______, KC_LSFT,  KC_LGUI, KC_LALT, KC_LCTL, _______, /**/ KC_DEL,      KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,  _______,
-    RGB_TOG, RGB_RMOD, RGB_MOD, RGB_VAD, RGB_VAI, _______, /**/ KC_PGUP,     KC_HOME, _______, _______, _______, _______,
-    _______, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, KC_TRNS, /**/ MO(_SYMBOL), _______, _______, _______, _______, _______
-
-  ),
+      KC_MPRV,      KC_MNXT,      KC_VOLD,      KC_VOLU,      KC_MPLY, _______,   _______,   KC_PGDN, KC_END,       KC_UP,        _______,      _______,
+      KC_LSFT,      KC_LGUI,      KC_LALT,      KC_LCTL,      _______, _______,   _______,   KC_DEL,  KC_LEFT,      KC_DOWN,      KC_RGHT,      KC_INS,
+      RGB_RMOD,     RGB_MOD,      RGB_VAD,      RGB_VAI,      RGB_TOG, _______,   _______,   KC_PGUP, KC_HOME,      _______,      _______,      _______,
+      _______,      _______,      _______,      _______,      KC_TRNS, _______,   _______,   KC_TAB,  _______,      _______,      _______,      _______
+      ),
   [_NUMBER] = LAYOUT_ortho_4x12(
-    _______, KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC,     /**/ KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,      _______,
-    KC_K,    LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4), KC_5,        /**/ KC_6,    RCTL_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0), KC_J,
-    _______, KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5,       /**/ KC_F6,   KC_F7,        KC_F8,        KC_F9,        KC_F10,       _______,
-    _______, KC_F11,       KC_F12,       _______,      _______,      MO(_SYMBOL), /**/ KC_TRNS, XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      _______
-  ),
+      KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, _______,   _______,   KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,
+      LSFT_T(KC_1), LGUI_T(KC_2), LALT_T(KC_3), LCTL_T(KC_4), KC_5,    _______,   _______,   KC_6,    RCTL_T(KC_7), RALT_T(KC_8), RGUI_T(KC_9), RSFT_T(KC_0),
+      KC_F1,        KC_F2,        KC_F3,        KC_F4,        KC_F5,   _______,   _______,   KC_F6,   KC_F7,        KC_F8,        KC_F9,        KC_F10,
+      _______,      KC_F11,       KC_F12,       KC_K,         KC_J,    _______,   _______,   KC_TRNS, _______,      _______,      _______,      KC_J
+      ),
   [_SYMBOL] = LAYOUT_ortho_4x12(
-   _______,  KC_EXLM, KC_AT,   KC_HASH,  KC_DLR,   KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_COLN, KC_SCLN, _______,
-   _______,  KC_LBRC, KC_LCBR, KC_LPRN,  KC_DQT,   KC_QUOT, KC_QUOT, KC_DQT,  KC_RPRN, KC_RCBR, KC_RBRC, _______,
-   KC_MINUS, KC_UNDS, XXXXXXX, KC_TILDE, KC_GRAVE, XXXXXXX, XXXXXXX, KC_BSLS, KC_PIPE, XXXXXXX, KC_PLUS, KC_EQUAL,
-   XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,  KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-  ),
+      KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, _______,   _______,   KC_CIRC, KC_AMPR,      KC_ASTR,      KC_COLN,      KC_SCLN,
+      KC_LBRC,      KC_LCBR,      KC_LPRN,      KC_DQT,       KC_QUOT, _______,   _______,   KC_QUOT, KC_DQT,       KC_RPRN,      KC_RCBR,      KC_RBRC,
+      KC_MINUS,     KC_UNDS,      KC_TILDE,     KC_GRAVE,     _______, _______,   _______,   _______, KC_BSLS,      KC_PIPE,      KC_PLUS,      KC_EQUAL,
+      _______,      _______,      _______,      _______,      KC_SPC,  _______,   _______,   _______, _______,      _______,      _______,      _______
+      ),
   [_MOUSE] = LAYOUT_ortho_4x12(
-   RESET,   _______, _______, _______, _______, _______, _______, _______, KC_MS_U, _______, _______, _______,
-   _______, _______, KC_BTN2, KC_BTN3, KC_BTN1, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,
-   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-  ),
+      RESET,        _______,      _______,      _______,      _______, _______,   _______,   _______, _______,      KC_MS_U,      _______,      _______,
+      _______,      KC_BTN2,      KC_BTN3,      KC_BTN1,      _______, _______,   _______,   _______, KC_MS_L,      KC_MS_D,      KC_MS_R,      _______,
+      _______,      _______,      _______,      _______,      _______, _______,   _______,   _______, _______,      _______,      _______,      _______,
+      _______,      _______,      _______,      _______,      _______, _______,   _______,   _______, _______,      _______,      _______,      _______
+      ),
 };
 
 
