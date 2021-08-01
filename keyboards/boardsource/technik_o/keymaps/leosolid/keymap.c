@@ -39,7 +39,7 @@
 #define MT_N RCTL_T(KC_N)
 
 #define MT_TAB RSFT_T(KC_TAB)
-#define MEH_BSPC MEH_T(KC_BSPC)
+#define MEH_ESC MEH_T(KC_ESC)
 
 /**********/
 /* COMBOS */
@@ -135,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_Q,         KC_W,         KC_F,         KC_P,         KC_B,    _______,   _______,   KC_J,    KC_L,         KC_U,         KC_Y,         KC_BSPC,
       MT_A,         MT_R,         MT_S,         MT_T,         KC_G,    _______,   _______,   KC_M,    MT_N,         MT_E,         MT_I,         MT_O,
       KC_Z,         KC_X,         KC_C,         KC_D,         KC_V,    _______,   _______,   KC_K,    KC_H,         KC_COMM,      KC_DOT,       KC_SLSH,
-      _______,      _______,      _______,      KC_ESC,       NAV_SPC, MOUSE_ENT, OSL_SYM, OSL_NUM, OSM_SHIFT,      _______,      _______,      _______
+      _______,      _______,      _______,      MEH_ESC,       NAV_SPC, MOUSE_ENT, OSL_SYM, OSL_NUM, OSM_SHIFT,      _______,      _______,      _______
       ),
   [_NAV] = LAYOUT_ortho_4x12(
       KC_MPRV,      KC_MNXT,      KC_VOLD,      KC_VOLU,      KC_MPLY, _______,   _______,   KC_PGDN, KC_END,       KC_UP,        _______,      _______,
