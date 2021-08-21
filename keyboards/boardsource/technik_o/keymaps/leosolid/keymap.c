@@ -138,10 +138,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______,      _______,      _______,      MEH_ESC,       NAV_SPC, MOUSE_ENT, OSL_SYM, OSL_NUM, OSM_SHIFT,      _______,      _______,      _______
       ),
   [_NAV] = LAYOUT_ortho_4x12(
-      KC_MPRV,      KC_MNXT,      KC_VOLD,      KC_VOLU,      KC_MPLY, _______,   _______,   KC_PGDN, KC_END,       KC_UP,        _______,      _______,
-      KC_LSFT,      KC_LGUI,      KC_LALT,      KC_LCTL,      _______, _______,   _______,   KC_DEL,  KC_LEFT,      KC_DOWN,      KC_RGHT,      KC_INS,
-      RGB_RMOD,     RGB_MOD,      RGB_VAD,      RGB_VAI,      RGB_TOG, _______,   _______,   KC_PGUP, KC_HOME,      _______,      _______,      _______,
-      _______,      _______,      _______,      _______,      KC_TRNS, _______,   _______,   KC_TAB,  _______,      _______,      _______,      _______
+      KC_MPRV,  KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY, _______, _______, KC_PGDN,      KC_END,  KC_UP,   _______, _______,
+      KC_LSFT,  KC_LGUI, KC_LALT, KC_LCTL, KC_TAB,  _______, _______, LSFT(KC_TAB), KC_LEFT, KC_DOWN, KC_RGHT, KC_TAB,
+      RGB_RMOD, RGB_MOD, RGB_VAD, RGB_VAI, RGB_TOG, _______, _______, KC_PGUP,      KC_HOME, _______, _______, _______,
+      _______,  _______, _______, _______, KC_TRNS, _______, _______, _______,      _______, _______, _______, _______
       ),
   [_NUMBER] = LAYOUT_ortho_4x12(
       KC_EXLM,      KC_AT,        KC_HASH,      KC_DLR,       KC_PERC, _______,   _______,   KC_CIRC, KC_AMPR,      KC_ASTR,      KC_DOT,       KC_COMM,
